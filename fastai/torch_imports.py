@@ -34,8 +34,8 @@ def load_model(m, p):
     sd = torch.load(p, map_location=lambda storage, loc: storage)
     names = set(m.state_dict().keys())
     for n in list(sd.keys()): # list "detatches" the iterator
-        if n not in names and n+'_raw' in names and n+'_raw' not in sd:
-            sd[n+'_raw'] = sd[n]
+        if n not in names and n+'_raw' in names:
+            if n+'_raw' not in sd: sd[n+'_raw'] = sd[n]
             del sd[n]
     m.load_state_dict(sd)
 
@@ -62,7 +62,7 @@ def inception_4(pre): return children(inceptionv4(pretrained=pre))[0]
 
 @_fastai_model('Inception 4', 'Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning',
                'https://arxiv.org/pdf/1602.07261.pdf')
-def inceptionresnet_2(pre): return load_pre(pre, InceptionResnetV2, 'inceptionresnetv2-d579a627')
+def inceptionresnet_2(pre): return load_pre(pre, InceptionResnetV2, 'inceptionresnetv2-520b38e4')
 
 @_fastai_model('ResNeXt 50', 'Aggregated Residual Transformations for Deep Neural Networks',
                'https://arxiv.org/abs/1611.05431')
