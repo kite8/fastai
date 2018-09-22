@@ -124,3 +124,6 @@ Thumbs.db
 
 # pytest
 .pytest_cache
+courses/dl1/lesson1.ipynb
+courses/dl1/lesson1.ipynb
+*.ipynb
